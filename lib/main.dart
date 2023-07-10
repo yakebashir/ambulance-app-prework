@@ -32,6 +32,10 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
 
         // new pul change from yake
+
+        //This is the fibonacci sequnce haha
+
+        //New changes from Josh, haha
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
