@@ -7,6 +7,8 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+//This is my first comment!
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
+
+        // new pul change from yake
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
