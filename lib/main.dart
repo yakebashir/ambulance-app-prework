@@ -36,6 +36,8 @@ class MyApp extends StatelessWidget {
         //This is the fibonacci sequnce haha
 
         //New changes from Josh, haha
+
+        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
