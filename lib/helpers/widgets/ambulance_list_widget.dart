@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../models/ambulance_model.dart';
-import '../pages/ambulance_details_page.dart';
+import '../../models/ambulance_model.dart';
+import '../../pages/ambulance_details_page.dart';
 import 'ambulance_card_widget.dart';
 
 class AmbulanceListWidget extends StatelessWidget {

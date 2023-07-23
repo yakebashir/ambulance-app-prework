@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../constants.dart';
-import '../models/ambulance_model.dart';
+import '../../constants.dart';
+import '../../models/ambulance_model.dart';
 
 class AmbulanceCard extends StatelessWidget {
   const AmbulanceCard({

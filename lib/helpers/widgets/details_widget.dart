@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/ambulance_model.dart';
+import '../../models/ambulance_model.dart';
 
 class DetailsWidget extends StatelessWidget {
   const DetailsWidget({

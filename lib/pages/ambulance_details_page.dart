@@ -1,12 +1,13 @@
-import '../constants.dart';
-import '../helpers/ambulance_card_widget.dart';
 import 'package:flutter/material.dart';
-import '../helpers/ambulance_estimates_widget.dart';
-import '../helpers/call_ambulance_button.dart';
-import '../helpers/details_widget.dart';
-import '../helpers/driver_info_display_widget.dart';
-import '../helpers/section_heading_widget.dart';
-import '../helpers/spaced_divider_widget.dart';
+
+import '../constants.dart';
+import '../helpers/widgets/ambulance_card_widget.dart';
+import '../helpers/widgets/ambulance_estimates_widget.dart';
+import '../helpers/widgets/call_ambulance_button.dart';
+import '../helpers/widgets/details_widget.dart';
+import '../helpers/widgets/driver_info_display_widget.dart';
+import '../helpers/widgets/section_heading_widget.dart';
+import '../helpers/widgets/spaced_divider_widget.dart';
 import '../models/ambulance_model.dart';
 
 class AmbulanceDetailsPage extends StatelessWidget {
