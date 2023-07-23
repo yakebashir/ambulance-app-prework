@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'constants.dart';
 import 'pages/home_page.dart';
 import 'pages/splash_screen_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 void main() {
   // Set the status bar color

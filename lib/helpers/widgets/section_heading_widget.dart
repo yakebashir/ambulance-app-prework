@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 class SectionHeading extends StatelessWidget {
   //variable that holds the heading text

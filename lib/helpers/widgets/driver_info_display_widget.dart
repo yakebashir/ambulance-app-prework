@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+import '../../constants.dart';
 
 class DriverInfoDisplayWidget extends StatelessWidget {
   //variable that holds the title of the driver's information
