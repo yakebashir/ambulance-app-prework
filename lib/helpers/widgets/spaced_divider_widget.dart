@@ -17,7 +17,7 @@ class SpacedDivider extends StatelessWidget {
         SizedBox(
           height: 1,
           child: Container(
-            color: kViolet,
+            color: kEngineeringOrange,
           ),
         ),
         const SizedBox(

@@ -9,7 +9,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: kViolet,
+      backgroundColor: kEngineeringOrange,
     );
   }
 }

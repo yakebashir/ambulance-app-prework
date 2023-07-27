@@ -11,7 +11,7 @@ class CallAmbulanceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: kViolet,
+        backgroundColor: kEngineeringOrange,
       ),
       onPressed: () {},
       child: const Padding(

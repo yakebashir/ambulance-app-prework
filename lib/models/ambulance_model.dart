@@ -1,74 +1,60 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:ambulance/models/travel_distance_model.dart';
+import 'package:ambulance/models/travel_duration_model.dart';
+
+import 'driver_model.dart';
+import 'hospital_model.dart';
+
 class Ambulance {
-  final String hospitalName;
-  final String telephoneNumber;
-  final String district;
-  final double rating;
-  final String image;
+  final TravelDistance distance;
+  final TravelDuration duration;
   final String details;
+  final Hospital hospital;
+  final Driver driver;
 
   const Ambulance({
-    required this.hospitalName,
-    required this.telephoneNumber,
-    required this.district,
-    required this.rating,
-    required this.image,
+    required this.distance,
+    required this.duration,
     required this.details,
+    required this.hospital,
+    required this.driver,
   });
-}
 
-List<Ambulance> ambulanceList = [
-  const Ambulance(
-    hospitalName: 'Kampala International Hospital',
-    telephoneNumber: '+25670567894',
-    district: 'Kampala',
-    rating: 4.5,
-    image: 'images/ambulance1.png',
-    details:
-        'These will be the details of this particular ambulance and they will enable a user to know just a little bit more about the ambulance and the hospital it is attached to.',
-  ),
-  const Ambulance(
-    hospitalName: 'Norvik Hospital',
-    telephoneNumber: '+25674567894',
-    district: 'Mukono',
-    rating: 4.0,
-    image: 'images/ambulance2.png',
-    details:
-        'These will be the details of this particular ambulance and they will enable a user to know just a little bit more about the ambulance and the hospital it is attached to.',
-  ),
-  const Ambulance(
-    hospitalName: 'Jehova Rapha Hospital',
-    telephoneNumber: '+25670367894',
-    district: 'Mukono',
-    rating: 5.0,
-    image: 'images/ambulance1.png',
-    details:
-        'These will be the details of this particular ambulance and they will enable a user to know just a little bit more about the ambulance and the hospital it is attached to.',
-  ),
-  const Ambulance(
-    hospitalName: 'Mengo Hospital',
-    telephoneNumber: '+25670527894',
-    district: 'Kampala',
-    rating: 4.0,
-    image: 'images/ambulance3.png',
-    details:
-        'These will be the details of this particular ambulance and they will enable a user to know just a little bit more about the ambulance and the hospital it is attached to.',
-  ),
-  const Ambulance(
-    hospitalName: 'Mulago Hospital',
-    telephoneNumber: '+25670561894',
-    district: 'Kampala',
-    rating: 4.0,
-    image: 'images/ambulance2.png',
-    details:
-        'These will be the details of this particular ambulance and they will enable a user to know just a little bit more about the ambulance and the hospital it is attached to.',
-  ),
-  const Ambulance(
-    hospitalName: 'Naggalama Hospital',
-    telephoneNumber: '+25670567094',
-    district: 'Mukono',
-    rating: 4.5,
-    image: 'images/ambulance3.png',
-    details:
-        'These will be the details of this particular ambulance and they will enable a user to know just a little bit more about the ambulance and the hospital it is attached to.',
-  ),
-];
+  //Method that returns a map from an Ambulance Object
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'distance': distance.toMap(),
+      'duration': duration.toMap(),
+      'details': details,
+      'hospital': hospital.toMap(),
+      'driver': driver.toMap(),
+    };
+  }
+
+  //Factory constructor that returns an Ambulance Object from a map
+  factory Ambulance.fromMap(Map<String, dynamic> map) {
+    return Ambulance(
+      distance: TravelDistance.fromMap(map['distance'] as Map<String, dynamic>),
+      duration: TravelDuration.fromMap(map['duration'] as Map<String, dynamic>),
+      details: map['details'] as String,
+      hospital: Hospital.fromMap(map['hospital'] as Map<String, dynamic>),
+      driver: Driver.fromMap(map['driver'] as Map<String, dynamic>),
+    );
+  }
+
+  Ambulance copyWith({
+    TravelDistance? distance,
+    TravelDuration? duration,
+    String? details,
+    Hospital? hospital,
+    Driver? driver,
+  }) {
+    return Ambulance(
+      distance: distance ?? this.distance,
+      duration: duration ?? this.duration,
+      details: details ?? this.details,
+      hospital: hospital ?? this.hospital,
+      driver: driver ?? this.driver,
+    );
+  }
+}

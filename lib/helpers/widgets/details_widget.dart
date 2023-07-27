@@ -16,35 +16,36 @@ class DetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
-          child: ValueListenableBuilder<int>(
-              valueListenable: maxLinesNotifier,
-              builder: (context, value, child) {
-                return Text(
-                  ambulance.details,
-                  style: const TextStyle(fontWeight: FontWeight.w200),
-                  maxLines: value,
-                  overflow: TextOverflow.ellipsis,
-                );
-              }),
+        ValueListenableBuilder<int>(
+          valueListenable: maxLinesNotifier,
+          builder: (context, value, child) {
+            return Text(
+              ambulance.details,
+              textAlign: TextAlign.justify,
+              style: const TextStyle(fontWeight: FontWeight.w200),
+              maxLines: value,
+              overflow: TextOverflow.ellipsis,
+            );
+          },
         ),
         GestureDetector(
           onTap: () {
-            if (maxLinesNotifier.value <= 2) {
+            if (maxLinesNotifier.value == 2) {
               maxLinesNotifier.value = 10;
             } else {
               maxLinesNotifier.value = 2;
             }
           },
-          child: ValueListenableBuilder(
+          child: ValueListenableBuilder<int>(
             valueListenable: maxLinesNotifier,
             builder: ((context, value, child) {
               return Text(
-                value <= 2 ? 'Read More' : 'Show Less',
+                value <= 2 ? 'Read more...' : 'Show less',
                 style: const TextStyle(
                   color: Colors.blue,
                 ),
@@ -52,6 +53,7 @@ class DetailsWidget extends StatelessWidget {
             }),
           ),
         ),
+        
       ],
     );
   }

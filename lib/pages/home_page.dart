@@ -1,5 +1,6 @@
-import '../constants.dart';
 import 'package:flutter/material.dart';
+
+import '../constants.dart';
 import '../helpers/widgets/ambulance_list_widget.dart';
 import '../helpers/widgets/user_location_widget.dart';
 
@@ -12,13 +13,13 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kVeryLightGrey,
-        body: const Column(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
             UserLocation(),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Ambulances near you...',
               style: TextStyle(
                 color: kBlack,
@@ -26,14 +27,8 @@ class HomePage extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            SizedBox(height: 20),
-            // SizedBox(
-            //   height: 0.5,
-            //   child: Container(
-            //     color: kElectricViolet,
-            //   ),
-            // ),
-            AmbulanceListWidget(),
+            const SizedBox(height: 20),
+            const AmbulanceListWidget(),
           ],
         ),
       ),

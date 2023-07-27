@@ -1,20 +1,27 @@
+import 'package:ambulance/cubits/ambulance_list/ambulance_list_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../config.dart';
 import '../../constants.dart';
+import '../../cubits/user/user_cubit.dart';
+import 'map_autocomplete_field.dart';
 
 class UserLocation extends StatelessWidget {
-  const UserLocation({
+  UserLocation({
     super.key,
   });
+
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 350,
       decoration: const BoxDecoration(
-        color: kViolet,
+        color: kEngineeringOrange,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(kRoundedBorderRadius),
+          //bottomLeft: Radius.circular(kRoundedBorderRadius),
           bottomRight: Radius.circular(kRoundedBorderRadius),
         ),
       ),
@@ -30,15 +37,15 @@ class UserLocation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Hi, Bashir',
+                  'Hi, Beloved',
                   style: TextStyle(color: kWhite),
                 ),
                 IconButton(
                   color: kWhite,
-                  highlightColor: kWhite,
+                  highlightColor: kDarkEngineeringOrange,
                   onPressed: () {},
                   icon: const Icon(
-                    Icons.account_circle_outlined,
+                    Icons.account_circle,
                     size: 32,
                   ),
                 )
@@ -54,25 +61,48 @@ class UserLocation extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const TextField(
-              decoration: InputDecoration(
-                hintText: 'Select Location',
-                hintStyle: TextStyle(color: kBlack),
-                filled: true,
-                fillColor: kWhite,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      kRoundedBorderRadius,
-                    ),
+            MapAutoCompleteField(
+              inputDecoration: InputDecoration(
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(kRoundedBorderRadius),
+                    bottomRight: Radius.circular(kRoundedBorderRadius),
+                    // bottomLeft: Radius.circular(kRoundedBorderRadius),
+                    // topRight: Radius.circular(kRoundedBorderRadius),
                   ),
                 ),
-                prefixIcon: Icon(
-                  Icons.location_on_outlined,
+                hintText: 'Enter your pickup location',
+                prefixIcon: const Icon(
+                  Icons.location_on,
                 ),
-                prefixIconColor: kBlack,
+                prefixIconColor: kEngineeringOrange,
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      controller.clear();
+                    },
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: kBlack,
+                      size: 15,
+                    )),
+                filled: true,
+                fillColor: kWhite,
               ),
+              locale: locale,
+              googleMapApiKey: gMapsAPIKey,
+              controller: controller,
+              itemBuilder: (BuildContext context, suggestion) {
+                return ListTile(
+                  title: Text(suggestion.description),
+                );
+              },
+              onSuggestionSelected: (suggestion) async {
+                controller.text = suggestion.description;
+                await context.read<UserCubit>().getDetails(
+                      placeId: suggestion.placeId,
+                      googleMapsAPIKey: gMapsAPIKey,
+                    );
+              },
             )
           ],
         ),

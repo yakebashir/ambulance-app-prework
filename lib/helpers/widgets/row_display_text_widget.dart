@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../../constants.dart';
 
-class EstimatesWidget extends StatelessWidget {
+class RowDisplayTextWidget extends StatelessWidget {
   //variable that holds the name of the desired estimate
   final String estimate;
   //variable that holds the value of the desired estimate
   final String valueWithUnits;
 
-  const EstimatesWidget({
+  const RowDisplayTextWidget({
     required this.estimate,
     required this.valueWithUnits,
     super.key,
@@ -20,7 +21,7 @@ class EstimatesWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          flex: 3,
+          //flex: 2,
           child: Text(
             estimate,
             style: TextStyle(
@@ -31,10 +32,19 @@ class EstimatesWidget extends StatelessWidget {
         ),
         Expanded(
           child: Text(
-            valueWithUnits,
+            ':',
+            style: TextStyle(
+              fontSize: 16,
+              color: kDarkGrey,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            '$valueWithUnits.',
             style: const TextStyle(
               fontSize: 16,
-              color: kViolet,
+              color: kEngineeringOrange,
               fontWeight: FontWeight.w400,
             ),
           ),

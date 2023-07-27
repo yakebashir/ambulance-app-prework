@@ -1,6 +1,7 @@
+import 'package:ambulance/cubits/ambulance_list/ambulance_list_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/ambulance_model.dart';
 import '../../pages/ambulance_details_page.dart';
 import 'ambulance_card_widget.dart';
 
@@ -15,9 +16,16 @@ class AmbulanceListWidget extends StatelessWidget {
       child: ListView.builder(
         primary: true,
         shrinkWrap: true,
-        itemCount: ambulanceList.length,
+        itemCount: context
+            .read<AmbulanceListCubit>()
+            .state
+            .ambulanceList
+            .length, //ambulanceList.length,
         itemBuilder: (context, index) {
-          final ambulance = ambulanceList[index];
+          final ambulance = context
+              .watch<AmbulanceListCubit>()
+              .state
+              .ambulanceList[index]; //ambulanceList[index];
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(

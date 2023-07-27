@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../constants.dart';
 
 class SectionHeading extends StatelessWidget {
@@ -12,16 +13,12 @@ class SectionHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.center,
       child: Text(
         text,
         style: const TextStyle(
           color: kGrey,
           fontSize: 18,
-          decoration: TextDecoration.underline,
-          decorationColor: kGrey,
-          decorationStyle: TextDecorationStyle.wavy,
-          decorationThickness: 1.5,
         ),
       ),
     );
