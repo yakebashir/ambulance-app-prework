@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+import 'package:ambulance/constants.dart';
+import 'package:ambulance/exceptions/custom_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:uuid/uuid.dart';
 
@@ -40,9 +42,19 @@ class GoogleMapsServices {
       if (result['status'] == 'ZERO_RESULTS') {
         return [];
       }
-      throw Exception(result['error_message']);
+      throw CustomException(
+        errorCode: 100,
+        title: errorCodesMap[100][title],
+        message: result['error_message'],
+        errorOrigin: ErrorOrigins.notARepository,
+      );
     } else {
-      throw Exception('Failed to fetch suggestion');
+      throw CustomException(
+        errorCode: 101,
+        title: errorCodesMap[101][title],
+        message: 'Unknown error occured!',
+        errorOrigin: ErrorOrigins.notARepository,
+      );
     }
   }
 
@@ -65,9 +77,19 @@ class GoogleMapsServices {
       if (result['status'] == 'ZERO_RESULTS') {
         return [];
       }
-      throw Exception(result['error_message']);
+      throw CustomException(
+        errorCode: 102,
+        title: errorCodesMap[102][title],
+        message: result['error_message'],
+        errorOrigin: ErrorOrigins.notARepository,
+      );
     } else {
-      throw Exception('Failed to fetch suggestion');
+      throw CustomException(
+        errorCode: 103,
+        title: errorCodesMap[103][title],
+        message: 'Unknown error occured!',
+        errorOrigin: ErrorOrigins.notARepository,
+      );
     }
   }
 
@@ -94,9 +116,19 @@ class GoogleMapsServices {
       if (result['status'] == 'ZERO_RESULTS') {
         return {'error_message': 'No results found'};
       }
-      throw Exception(result['error_message']);
+      throw CustomException(
+        errorCode: 104,
+        title: errorCodesMap[104][title],
+        message: result['error_message'],
+        errorOrigin: ErrorOrigins.notARepository,
+      );
     } else {
-      throw Exception('Failed to fetch distance and duration');
+      throw CustomException(
+        errorCode: 105,
+        title: errorCodesMap[105][title],
+        message: 'Unknown error occured!',
+        errorOrigin: ErrorOrigins.notARepository,
+      );
     }
   }
 }

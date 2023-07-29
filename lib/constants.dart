@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'exceptions/custom_exception.dart';
 
 //Our Colors
 const Color kEngineeringOrange = Color.fromRGBO(200, 0, 0, 1);
@@ -47,22 +48,12 @@ const double kHorizontalPadding = 20;
 //Google maps locale
 const String locale = 'ug';
 
-//Enum that tells us the error status of any State Object
-enum ErrorStatus {
-  errorOccured,
-  noError;
-
-  //Method that makes a String from an enum
-  String toMap() => name;
-  //factory constructor that makes an enum from a string
-  factory ErrorStatus.fromMap(String name) => ErrorStatus.values.byName(name);
-}
-
 //Enum that tells us the data status of any State Object
 enum DataStatus {
   initial,
   loading,
-  loaded;
+  loaded,
+  error;
 
   //Method that makes a String from an enum
   String toMap() => name;
@@ -79,3 +70,59 @@ const String ambulanceListKey = 'ambulanceList';
 const String districtListCollectionPath = 'ug districts';
 const String districtListDocumentID = 'list document ID';
 const String districtListKey = 'districtList';
+
+
+//map key stored
+const String title = 'title';
+//Error Codes
+const Map<int, dynamic> errorCodesMap = {
+  //Internet error code
+  98: {title: 'No internet! Please reconnect.'},
+  //System error code
+  99: {title: 'An error occured!'},
+  //Google maps error codes
+  100: {title: 'Failed to get location suggestions!'},
+  101: {title: 'An error occured while getting location suggestions!'},
+  102: {title: 'Failed to get input location details!'},
+  103: {title: 'An error occured while getting input location details!'},
+  104: {title: 'Failed to get distance and duration!'},
+  105: {title: 'An error occured while getting distance and location!'},
+  //Geolocator error codes
+  200: {title: 'Location permission denied!'},
+  201: {title: 'Location permission denied forever!'},
+  202: {title: 'Location service disabled!'},
+  //Firestore error codes
+  300: {title: 'Failed to create firestore collection!'},
+  301: {title: 'An error occured during firestore collection creation!'},
+  302: {title: 'Failed to fetch data from firestore!'},
+  303: {title: 'An error occured while fetching data from firestore!'},
+  //Call service error codes
+  400: {title: 'An error occured while trying to make call!'},
+  //Below are error codes for combined exceptions
+  500: {title: 'Internet has blocked getting of user location details'},
+  501: {title: 'Internet has blocked getting of user current location'},
+
+  590: {title: 'Internet has blocked district list cubit'},
+  591: {title: 'Internet has blocked ambulance list cubit'},
+};
+
+//Empty exception
+final emptyException = CustomException(
+  errorCode: 0,
+  title: '',
+  message: '',
+  errorOrigin: ErrorOrigins.notARepository,
+);
+
+//Error Origins
+enum ErrorOrigins {
+  userRepository,
+  districtListRepository,
+  ambulanceListRepository,
+  internetServicesRepository,
+  //One repository that doesn't exist to use as a place holder
+  notARepository;
+
+  String toMap() => name;
+  factory ErrorOrigins.fromMap(String name) => ErrorOrigins.values.byName(name);
+}

@@ -1,4 +1,3 @@
-import 'package:ambulance/cubits/ambulance_list/ambulance_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,14 +7,16 @@ import '../../cubits/user/user_cubit.dart';
 import 'map_autocomplete_field.dart';
 
 class UserLocation extends StatelessWidget {
-  UserLocation({
+  final BuildContext context;
+  const UserLocation({
+    required this.context,
     super.key,
   });
 
-  final TextEditingController controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    final TextEditingController controller = TextEditingController(
+        text: context.watch<UserCubit>().state.user.pickUpLocation);
     return Container(
       height: 350,
       decoration: const BoxDecoration(
@@ -99,7 +100,7 @@ class UserLocation extends StatelessWidget {
               onSuggestionSelected: (suggestion) async {
                 controller.text = suggestion.description;
                 await context.read<UserCubit>().getDetails(
-                      placeId: suggestion.placeId,
+                      suggestion: suggestion,
                       googleMapsAPIKey: gMapsAPIKey,
                     );
               },

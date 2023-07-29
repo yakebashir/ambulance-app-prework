@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
-import '../../Services/google_maps_services.dart';
+import '../../services/google_maps_services.dart';
 import '../../config.dart';
 
 /// Takes the required values [controller], [onSuggestionSelected], [googleMapApiKey]

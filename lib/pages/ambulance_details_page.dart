@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import '../helpers/widgets/row_display_text_widget.dart';
-import '../helpers/widgets/call_ambulance_button.dart';
-import '../helpers/widgets/details_widget.dart';
-import '../helpers/widgets/section_heading_widget.dart';
-import '../helpers/widgets/spaced_divider_widget.dart';
 import '../models/ambulance_model.dart';
+import '../widgets/call_ambulance_button.dart';
+import '../widgets/details_widget.dart';
+import '../widgets/row_display_text_widget.dart';
+import '../widgets/section_heading_widget.dart';
+import '../widgets/spaced_divider_widget.dart';
 
 class AmbulanceDetailsPage extends StatelessWidget {
   //ambulance object
@@ -142,7 +142,9 @@ class AmbulanceDetailsPage extends StatelessWidget {
                         valueWithUnits: 'Male',
                       ),
                       const SizedBox(height: 50),
-                      const CallAmbulanceButton(),
+                      CallAmbulanceButton(
+                        ambulance: ambulance,
+                      ),
                     ],
                   ),
                 ),

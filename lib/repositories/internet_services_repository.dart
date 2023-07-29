@@ -1,4 +1,4 @@
-import '../Services/internet_services.dart';
+import '../services/internet_services.dart';
 
 class InternetServicesRepository {
   //Checks internet connectivity status

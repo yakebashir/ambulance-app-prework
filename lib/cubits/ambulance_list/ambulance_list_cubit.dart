@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'dart:developer';
+import 'package:ambulance/cubits/intenet_services/internet_services_cubit.dart';
+import 'package:ambulance/exceptions/custom_exception.dart';
 
 import '../../models/geocoordinates_model.dart';
 import '../district_list/district_list_cubit.dart';
@@ -9,8 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../config.dart';
 import '../../constants.dart';
 import '../../models/ambulance_model.dart';
-import '../../models/driver_model.dart';
-import '../../models/hospital_model.dart';
 import '../../models/travel_distance_model.dart';
 import '../../models/travel_duration_model.dart';
 import '../../repositories/ambulance_list_repository.dart';
@@ -21,19 +22,40 @@ part 'ambulance_list_state.dart';
 class AmbulanceListCubit extends Cubit<AmbulanceListState> {
   final UserCubit userCubit;
   final DistrictListCubit districtListCubit;
+
   late final StreamSubscription districtListStreamSubscription;
 
   AmbulanceListCubit({
     required this.userCubit,
     required this.districtListCubit,
   }) : super(AmbulanceListState.initial()) {
+    //districtListStreamSubscription
     districtListStreamSubscription =
-        districtListCubit.stream.listen((distanceListState) async {
-      if (distanceListState.districtList[0].distance.value != 0 &&
-          distanceListState.districtList[1].distance.value != 0) {
-        await fetchList();
+        districtListCubit.stream.listen((districtListState) async {
+      if (districtListState.dataStatus == DataStatus.loaded) {
+        print('Getting Distance and Duration of the ambulances');
         await getDistanceAndDuration();
-        print(state.toMap());
+        print('state.toMap() ${state.toMap()}');
+        //log('AmbulanceListState : ${state.toMap()}');
+      }
+      /*If ambulance list hasn't been fetched before and internet is connected, and district list has already 
+      been fetched then fetch list. We dont want to fetch both lists simultaneously as that could slow us down.*/
+      if (!state.hasFetchedList && districtListState.hasFetchedList) {
+        print(
+            ' \n ----------------------Print Calling ambulance fetch list------------------------------');
+        await fetchList();
+        print(
+            ' \n ----------------------Done Calling ambulance fetch list------------------------------');
+        //If list was fetched successfully, then mark hasFetchedList as true
+        print(
+            'Exception code for ambulance list exception: ${state.exception.errorCode}');
+        if (state.exception.errorCode == 0) {
+          print('Has ambulance list been fetched? :${state.hasFetchedList}');
+          emit(state.copyWith(hasFetchedList: true));
+          print(
+              ' \n ----------------------Emitting State ------------------------------');
+          print('Has ambulance list been fetched? :${state.hasFetchedList}');
+        }
       }
     });
   }
@@ -48,41 +70,58 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
   //Method that uses FirestoreServices to store our list of ambulances. Single Use.
   Future<void> createOrUpdateList() async {
     try {
+      emit(state.copyWith(exception: emptyException));
       await AmbulanceListRepository.createCollection(state.toMap());
-    } catch (e) {
+    } on CustomException catch (e) {
       /*Not typical but since this method is just ours for use and we'll delete it before porting 
       the app, errors are unlikely to happen and if they do, we can handle them*/
-      rethrow;
+      emit(state.copyWith(
+        exception: e,
+        dataStatus: DataStatus.error,
+      ));
     }
   }
 
   //Fetches Ambulance list from cloud firestore and emits new states as they occur
   Future<void> fetchList() async {
     //Note: ensure that ErrorStatus is reset before loading again. Can reset it here or in a dialog box
-    emit(state.copyWith(dataStatus: DataStatus.loading));
+    print('Start of fetch list method::::::::::::::::::::::::');
+    emit(state.copyWith(
+      dataStatus: DataStatus.loading,
+      exception: emptyException,
+    ));
+    print('state.hasFetchedList ${state.hasFetchedList}');
     try {
       var ambulanceListMap = await AmbulanceListRepository.fetchDocument();
       ambulanceListMap = ambulanceListMap[ambulanceListKey];
+      //Maintain data status as loading
       emit(
         state.copyWith(
           ambulanceList:
               AmbulanceListState.fromMap(ambulanceListMap).ambulanceList,
-          dataStatus: DataStatus.loaded,
         ),
       );
-    } catch (e) {
+      print('state.hasFetchedList ${state.hasFetchedList}');
+      print('End of fetch list method::::::::::::::::::::::::');
+      log('AmbulanceListState : ${state.toMap()}');
+    } on CustomException catch (e) {
       //If data fails to load, it goes back to initial state. ErrorStatus reflects the error
       emit(
         state.copyWith(
-          errorStatus: ErrorStatus.errorOccured,
-          dataStatus: DataStatus.initial,
+          exception: e,
+          dataStatus: DataStatus.error,
         ),
       );
+      rethrow;
     }
   }
 
   //Allows us to get distance and duration between a user's chosen location and the hospital
   Future<void> getDistanceAndDuration() async {
+    emit(state.copyWith(
+      dataStatus: DataStatus.loading,
+      exception: emptyException,
+    ));
     final user = userCubit.state.user;
     try {
       final ambulanceList = state.ambulanceList;
@@ -103,15 +142,20 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
           duration: TravelDuration.fromMap(durationMap),
         );
       }
-      emit(state.copyWith(ambulanceList: newList));
+      //Maintain data status as loading
+      emit(state.copyWith(
+        ambulanceList: newList,
+      ));
       filterListForDisplay();
-    } catch (e) {
+      log('AmbulanceListState : ${state.toMap()}');
+    } on CustomException catch (e) {
       emit(
         state.copyWith(
-          errorStatus: ErrorStatus.errorOccured,
-          dataStatus: DataStatus.initial,
+          exception: e,
+          dataStatus: DataStatus.error,
         ),
       );
+      rethrow;
     }
   }
 
@@ -134,7 +178,10 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
     }
     //Our new list now only has max ie 10 ambulances from closest selected districts
     newList.sort((a, b) => a.duration.value.compareTo(b.duration.value));
-    //Emit this new sorted list as our current ambulance list
-    emit(state.copyWith(ambulanceList: newList));
+    //Emit this new sorted list as our current ambulance list. Show that loading is over
+    emit(state.copyWith(
+      ambulanceList: newList,
+      dataStatus: DataStatus.loaded,
+    ));
   }
 }

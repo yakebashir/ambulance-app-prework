@@ -6,6 +6,7 @@ class User {
   final String surname;
   final String phoneNumber;
   final String email;
+  final String pickUpLocation;
   final GeoCoordinates? geoCoordinates;
 
   User({
@@ -13,6 +14,7 @@ class User {
     this.surname = '',
     this.phoneNumber = '',
     this.email = '',
+    this.pickUpLocation = '',
     this.geoCoordinates,
   });
 
@@ -22,6 +24,7 @@ class User {
       'surname': surname,
       'phoneNumber': phoneNumber,
       'email': email,
+      'pickUpLocation': pickUpLocation,
       'geoCoordinates': geoCoordinates?.toMap(),
     };
   }
@@ -32,10 +35,34 @@ class User {
       surname: map['surname'] as String,
       phoneNumber: map['phoneNumber'] as String,
       email: map['email'] as String,
+      pickUpLocation: map['pickUpLocation'] as String,
       geoCoordinates: map['geoCoordinates'] != null
           ? GeoCoordinates.fromMap(
               map['geoCoordinates'] as Map<String, dynamic>)
           : null,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'User(firstName: $firstName, surname: $surname, phoneNumber: $phoneNumber, email: $email, pickUpLocation: $pickUpLocation, geoCoordinates: $geoCoordinates)';
+  }
+
+  User copyWith({
+    String? firstName,
+    String? surname,
+    String? phoneNumber,
+    String? email,
+    String? pickUpLocation,
+    GeoCoordinates? geoCoordinates,
+  }) {
+    return User(
+      firstName: firstName ?? this.firstName,
+      surname: surname ?? this.surname,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      email: email ?? this.email,
+      pickUpLocation: pickUpLocation ?? this.pickUpLocation,
+      geoCoordinates: geoCoordinates ?? this.geoCoordinates,
     );
   }
 }

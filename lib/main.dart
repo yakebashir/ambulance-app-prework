@@ -1,3 +1,4 @@
+import 'package:ambulance/cubits/error_handling/error_handling_cubit.dart';
 import 'package:ambulance/cubits/intenet_services/internet_services_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,12 +33,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<InternetServicesCubit>(
+          create: (context) => InternetServicesCubit(),
+        ),
         BlocProvider<UserCubit>(
           create: (context) => UserCubit(),
         ),
         BlocProvider<DistrictListCubit>(
           create: (context) => DistrictListCubit(
             userCubit: context.read<UserCubit>(),
+            internetServicesCubit: context.read<InternetServicesCubit>(),
           ),
         ),
         BlocProvider<AmbulanceListCubit>(
@@ -46,22 +51,26 @@ class MyApp extends StatelessWidget {
             districtListCubit: context.read<DistrictListCubit>(),
           ),
         ),
-        BlocProvider<InternetServicesCubit>(
-          create: (context) => InternetServicesCubit(),
+        BlocProvider<ErrorHandlingCubit>(
+          create: (context) => ErrorHandlingCubit(
+            internetServicesCubit: context.read<InternetServicesCubit>(),
+            userCubit: context.read<UserCubit>(),
+            districtListCubit: context.read<DistrictListCubit>(),
+            ambulanceListCubit: context.read<AmbulanceListCubit>(),
+          ),
         ),
       ],
       child: MaterialApp(
-      routes: {
-        SplashScreenPage.routeName: (context) => const SplashScreenPage(),
-        HomePage.routeName: (context) => const HomePage(),
-      },
+        routes: {
+          SplashScreenPage.routeName: (context) => const SplashScreenPage(),
+          HomePage.routeName: (context) => const HomePage(),
+        },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: kEngineeringOrange),
         useMaterial3: true,
-      ),
-      //Added home property
+        ),
       initialRoute: HomePage.routeName,
       ),
     );

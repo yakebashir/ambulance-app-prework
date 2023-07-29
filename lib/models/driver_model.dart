@@ -3,15 +3,15 @@
 class Driver {
   final String name;
   final String gender;
-  final String? airtelNumber;
-  final String? mtnNumber;
+  final String airtelNumber;
+  final String mtnNumber;
 
   //Constructor
   const Driver({
     required this.name,
     required this.gender,
-    this.airtelNumber,
-    this.mtnNumber,
+    required this.airtelNumber,
+    required this.mtnNumber,
   });
 
   //Method that returns a map from a Driver Object
@@ -29,9 +29,8 @@ class Driver {
     return Driver(
       name: map['name'] as String,
       gender: map['gender'] as String,
-      airtelNumber:
-          map['airtelNumber'] != null ? map['airtelNumber'] as String : null,
-      mtnNumber: map['mtnNumber'] != null ? map['mtnNumber'] as String : null,
+      airtelNumber: map['airtelNumber'] as String,
+      mtnNumber: map['mtnNumber'] as String,
     );
   }
 }

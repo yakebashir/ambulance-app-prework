@@ -1,5 +1,6 @@
-import '../Services/firestore_services.dart';
-import '../Services/google_maps_services.dart';
+import '../exceptions/custom_exception.dart';
+import '../services/firestore_services.dart';
+import '../services/google_maps_services.dart';
 import '../constants.dart';
 
 class DistrictListRepository {
@@ -14,8 +15,8 @@ class DistrictListRepository {
         listKey: districtListKey,
         map: ambulanceListMap,
       );
-    } catch (e) {
-      rethrow;
+    } on CustomException catch (e) {
+      throw e.copyWith(errorOrigin: ErrorOrigins.districtListRepository);
     }
   }
 
@@ -27,8 +28,8 @@ class DistrictListRepository {
         documentID: districtListDocumentID,
       );
       return districtListMap;
-    } catch (e) {
-      rethrow;
+    } on CustomException catch (e) {
+      throw e.copyWith(errorOrigin: ErrorOrigins.districtListRepository);
     }
   }
 
@@ -49,8 +50,8 @@ class DistrictListRepository {
         googleMapsAPIKey: googleMapsAPIKey,
       );
       return result;
-    } catch (e) {
-      rethrow;
+    } on CustomException catch (e) {
+      throw e.copyWith(errorOrigin: ErrorOrigins.districtListRepository);
     }
   }
 }

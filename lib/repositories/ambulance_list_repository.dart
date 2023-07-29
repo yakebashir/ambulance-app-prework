@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:ambulance/Services/firestore_services.dart';
+import 'package:ambulance/services/firestore_services.dart';
 
-import '../Services/google_maps_services.dart';
+import '../exceptions/custom_exception.dart';
+import '../services/google_maps_services.dart';
 import '../constants.dart';
 
 class AmbulanceListRepository {
@@ -16,8 +17,8 @@ class AmbulanceListRepository {
         listKey: ambulanceListKey,
         map: ambulanceListMap,
       );
-    } catch (e) {
-      rethrow;
+    } on CustomException catch (e) {
+      throw e.copyWith(errorOrigin: ErrorOrigins.ambulanceListRepository);
     }
   }
 
@@ -29,8 +30,8 @@ class AmbulanceListRepository {
         documentID: ambulanceListDocumentID,
       );
       return ambulanceListMap;
-    } catch (e) {
-      rethrow;
+    } on CustomException catch (e) {
+      throw e.copyWith(errorOrigin: ErrorOrigins.ambulanceListRepository);
     }
   }
 
@@ -51,8 +52,8 @@ class AmbulanceListRepository {
         googleMapsAPIKey: googleMapsAPIKey,
       );
       return result;
-    } catch (e) {
-      rethrow;
+    } on CustomException catch (e) {
+      throw e.copyWith(errorOrigin: ErrorOrigins.ambulanceListRepository);
     }
   }
 }

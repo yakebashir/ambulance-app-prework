@@ -9,6 +9,7 @@ class InternetServicesCubit extends Cubit<InternetServicesState> {
   InternetServicesCubit() : super(InternetServicesState.initial());
 
   Future<void> checkInternetStatus() async {
+    emit(state.copyWith(internetStatus: InternetStatus.initial));
     final bool isInternetConnected =
         await InternetServicesRepository.checkInternetStatus();
     if (isInternetConnected) {
