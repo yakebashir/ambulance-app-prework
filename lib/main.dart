@@ -1,5 +1,7 @@
-import 'package:ambulance/cubits/error_handling/error_handling_cubit.dart';
-import 'package:ambulance/cubits/intenet_services/internet_services_cubit.dart';
+import 'package:ambulance/observer/app_bloc_observer.dart';
+
+import 'cubits/error_handling/error_handling_cubit.dart';
+import 'cubits/intenet_services/internet_services_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +22,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: kEngineeringOrange,
   ));
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
 

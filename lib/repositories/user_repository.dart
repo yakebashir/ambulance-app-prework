@@ -1,5 +1,5 @@
-import 'package:ambulance/Services/geolocator_services.dart';
-import 'package:ambulance/services/call_services.dart';
+import '../Services/geolocator_services.dart';
+import '../services/call_services.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../constants.dart';

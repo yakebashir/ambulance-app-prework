@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
 
-import 'package:ambulance/cubits/intenet_services/internet_services_cubit.dart';
+import '../intenet_services/internet_services_cubit.dart';
 
 import '../../config.dart';
 import '../../constants.dart';
 import '../../exceptions/custom_exception.dart';
-import '../../models/geocoordinates_model.dart';
 import '../../models/travel_distance_model.dart';
 import '../../models/travel_duration_model.dart';
 import '../user/user_cubit.dart';
@@ -33,10 +31,7 @@ class DistrictListCubit extends Cubit<DistrictListState> {
     userStreamSubscription = userCubit.stream.listen((userState) async {
       //If the user's geoCoordinates have been determined, getDistanceAndDuration
       if (userState.dataStatus == DataStatus.loaded) {
-        print('Getting Distance and Duration for District List');
         await getDistanceAndDuration();
-        print('state.toMap() ${state.toMap()}');
-        //log('DistrictListState : ${state.toMap()}');
       }
     });
     //internetServiceStreamSubscription
@@ -45,17 +40,10 @@ class DistrictListCubit extends Cubit<DistrictListState> {
       if (internetState.internetStatus == InternetStatus.connected) {
         //If district list hasn't been fetched before and internet is connected, fetch list
         if (!state.hasFetchedList) {
-          print(
-              ' \n ----------------------Print Calling district fetch list------------------------------');
           await fetchList();
-          print(
-              ' \n ----------------------District fetch list Complete------------------------------');
           //If list was fetched successfully, then mark hasFetchedList as true
           if (state.exception.errorCode == 0) {
-            print(
-                ' \n ----------------------Emitting State after fetching list------------------------------');
             emit(state.copyWith(hasFetchedList: true));
-            print('Has district list been fetched? :${state.hasFetchedList}');
           }
         }
       }
@@ -82,6 +70,7 @@ class DistrictListCubit extends Cubit<DistrictListState> {
         exception: e,
         dataStatus: DataStatus.error,
       ));
+      //rethrow;
     }
   }
 
@@ -101,7 +90,6 @@ class DistrictListCubit extends Cubit<DistrictListState> {
           districtList: DistrictListState.fromMap(districtListMap).districtList,
         ),
       );
-      log('DistrictListState : ${state.toMap()}');
     } on CustomException catch (e) {
       //If data fails to load, it goes back to initial state. ErrorStatus reflects the error
       emit(
@@ -110,7 +98,7 @@ class DistrictListCubit extends Cubit<DistrictListState> {
           dataStatus: DataStatus.error,
         ),
       );
-      rethrow;
+      //rethrow;
     }
   }
 
@@ -122,8 +110,9 @@ class DistrictListCubit extends Cubit<DistrictListState> {
     ));
     try {
       final user = userCubit.state.user;
-      late List<District> newList;
+      List<District> newList = [];
       final districtList = state.districtList;
+      newList = districtList;
       for (int i = 0; i < districtList.length; i++) {
         final result = await DistrictListRepository.getDistanceAndDuration(
           originLat: user.geoCoordinates!.latitude,
@@ -134,7 +123,6 @@ class DistrictListCubit extends Cubit<DistrictListState> {
         );
         final distanceMap = result['rows'][0]['elements'][0]['distance'];
         final durationMap = result['rows'][0]['elements'][0]['duration'];
-        newList = districtList;
         newList[i] = newList[i].copyWith(
           distance: TravelDistance.fromMap(distanceMap),
           duration: TravelDuration.fromMap(durationMap),
@@ -146,7 +134,6 @@ class DistrictListCubit extends Cubit<DistrictListState> {
       ));
       //Get districts with max ie 10 closest ambulances
       getClosestDistrictsToDisplay();
-      log('UserState : ${state.toMap()}');
     } on CustomException catch (e) {
       emit(
         state.copyWith(
@@ -154,7 +141,7 @@ class DistrictListCubit extends Cubit<DistrictListState> {
           dataStatus: DataStatus.error,
         ),
       );
-      rethrow;
+      //rethrow;
     }
   }
 
@@ -165,7 +152,6 @@ class DistrictListCubit extends Cubit<DistrictListState> {
     //Sort district list in order of shortest to highest duration
     districtList.sort((a, b) => a.duration.value.compareTo(b.duration.value));
     List<District> newList = [];
-    const int maxAmbulancesToDisplay = 10;
     //Select enough districts to make max ambulances to display. This will help us limit google maps api calls
     for (int i = 0; i < districtList.length; i++) {
       //Add a district to our new list each time

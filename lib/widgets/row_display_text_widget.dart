@@ -42,9 +42,9 @@ class RowDisplayTextWidget extends StatelessWidget {
         Expanded(
           child: Text(
             '$valueWithUnits.',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 16,
-              color: kEngineeringOrange,
+              color: Colors.green.shade900,
               fontWeight: FontWeight.w400,
             ),
           ),

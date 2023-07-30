@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+
 import 'package:ambulance/constants.dart';
 import 'package:ambulance/exceptions/custom_exception.dart';
 import 'package:dio/dio.dart';

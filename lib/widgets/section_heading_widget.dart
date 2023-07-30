@@ -17,7 +17,7 @@ class SectionHeading extends StatelessWidget {
       child: Text(
         text,
         style: const TextStyle(
-          color: kGrey,
+          color: kBlack,
           fontSize: 18,
         ),
       ),

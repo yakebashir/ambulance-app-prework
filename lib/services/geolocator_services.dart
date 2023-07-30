@@ -43,14 +43,23 @@ class GeolocatorServices {
       );
     }
     //Now that even location service is on, get current position
+    //NOTE: The getCurrentPosition method can work both online and offline. Offline returns
+    //..user's coarse location. Online is a fine location or whichever highest accuracy you chose
     return await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.bestForNavigation,
     );
   }
 
   static Future<void> getLocationPermission() async {
-    //Request permission
-    await Geolocator.requestPermission();
+    LocationPermission permission;
+    //Check to see if the permission has been granted
+    permission = await Geolocator.checkPermission();
+    //If permission has been denied, throw exception
+    if (permission != LocationPermission.always ||
+        permission != LocationPermission.whileInUse) {
+      //Request permission
+      await Geolocator.requestPermission();
+    }
   }
 
   //This is what we do in response to location service disabled

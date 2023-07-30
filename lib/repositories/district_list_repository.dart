@@ -1,7 +1,7 @@
+import '../constants.dart';
 import '../exceptions/custom_exception.dart';
 import '../services/firestore_services.dart';
 import '../services/google_maps_services.dart';
-import '../constants.dart';
 
 class DistrictListRepository {
   //Creates District list on Cloud Firestore
@@ -53,5 +53,6 @@ class DistrictListRepository {
     } on CustomException catch (e) {
       throw e.copyWith(errorOrigin: ErrorOrigins.districtListRepository);
     }
+    
   }
 }

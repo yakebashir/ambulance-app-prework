@@ -99,11 +99,10 @@ const Map<int, dynamic> errorCodesMap = {
   //Call service error codes
   400: {title: 'An error occured while trying to make call!'},
   //Below are error codes for combined exceptions
-  500: {title: 'Internet has blocked getting of user location details'},
-  501: {title: 'Internet has blocked getting of user current location'},
-
-  590: {title: 'Internet has blocked district list cubit'},
-  591: {title: 'Internet has blocked ambulance list cubit'},
+  500: {title: 'Not connected to the internet'},
+  501: {title: 'Not connected to the internet'},
+  502: {title: 'Not connected to the internet'},
+  503: {title: 'Not connected to the internet'},
 };
 
 //Empty exception
@@ -126,3 +125,6 @@ enum ErrorOrigins {
   String toMap() => name;
   factory ErrorOrigins.fromMap(String name) => ErrorOrigins.values.byName(name);
 }
+
+//Max number of ambulances to display
+const int maxAmbulancesToDisplay = 10;

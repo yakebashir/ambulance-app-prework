@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
-import 'package:ambulance/exceptions/custom_exception.dart';
+import '../../exceptions/custom_exception.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +41,6 @@ class UserCubit extends Cubit<UserState> {
           dataStatus: DataStatus.loaded,
         ),
       );
-      log('UserState : ${state.toMap()}');
     } on CustomException catch (e) {
       emit(
         state.copyWith(
@@ -50,7 +48,7 @@ class UserCubit extends Cubit<UserState> {
           dataStatus: DataStatus.error,
         ),
       );
-      rethrow;
+      //rethrow;
     }
   }
 
@@ -59,9 +57,11 @@ class UserCubit extends Cubit<UserState> {
     await UserRepository.getLocationPermission();
   }
 
+  //
   Future<void> getCurrentPosition() async {
     emit(state.copyWith(
       exception: emptyException,
+      user: state.user.copyWith(geoCoordinates: null),
       dataStatus: DataStatus.loading,
     ));
     try {
@@ -76,13 +76,12 @@ class UserCubit extends Cubit<UserState> {
         ),
         dataStatus: DataStatus.loaded,
       ));
-      log('UserState : ${state.toMap()}');
     } on CustomException catch (e) {
       emit(state.copyWith(
         exception: e,
         dataStatus: DataStatus.error,
       ));
-      rethrow;
+      //rethrow;
     }
   }
 
@@ -96,6 +95,7 @@ class UserCubit extends Cubit<UserState> {
       await UserRepository.makePhoneCall(phoneNumber);
     } on CustomException catch (e) {
       emit(state.copyWith(dataStatus: DataStatus.error, exception: e));
+      //rethrow;
     }
   }
 }

@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:ambulance/constants.dart';
+import 'package:ambulance/cubits/intenet_services/internet_services_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import '../../services/google_maps_services.dart';
@@ -71,6 +74,11 @@ class MapAutoCompleteField extends StatelessWidget {
             // color: Pallets.grey50,
           ),
           child: TypeAheadFormField(
+            suggestionsBoxDecoration: const SuggestionsBoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(kRoundedBorderRadius),
+              ),
+            ),
             textFieldConfiguration: TextFieldConfiguration(
               focusNode: focusNode,
               controller: controller,
@@ -124,6 +132,34 @@ class MapAutoCompleteField extends StatelessWidget {
                   );
                 },
             itemBuilder: itemBuilder,
+            errorBuilder: (BuildContext context, Object? error) {
+              if (context.read<InternetServicesCubit>().state.internetStatus ==
+                  InternetStatus.disconnected) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    error != null
+                        ? 'Connect to the internet to get suggestions!'
+                        : '',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: kDarkGrey,
+                    ),
+                  ),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  error != null ? 'An error occured' : '',
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    color: kDarkGrey,
+                  ),
+                ),
+              );
+            },
+  
             transitionBuilder: transitionBuilder ??
                 (BuildContext context, Widget suggestionsBox,
                     AnimationController? controller) {

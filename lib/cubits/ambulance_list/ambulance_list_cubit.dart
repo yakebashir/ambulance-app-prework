@@ -1,20 +1,17 @@
 import 'dart:async';
-import 'dart:developer';
-import 'package:ambulance/cubits/intenet_services/internet_services_cubit.dart';
-import 'package:ambulance/exceptions/custom_exception.dart';
 
-import '../../models/geocoordinates_model.dart';
-import '../district_list/district_list_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../config.dart';
 import '../../constants.dart';
+import '../../exceptions/custom_exception.dart';
 import '../../models/ambulance_model.dart';
 import '../../models/travel_distance_model.dart';
 import '../../models/travel_duration_model.dart';
 import '../../repositories/ambulance_list_repository.dart';
+import '../district_list/district_list_cubit.dart';
 import '../user/user_cubit.dart';
 
 part 'ambulance_list_state.dart';
@@ -33,28 +30,15 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
     districtListStreamSubscription =
         districtListCubit.stream.listen((districtListState) async {
       if (districtListState.dataStatus == DataStatus.loaded) {
-        print('Getting Distance and Duration of the ambulances');
         await getDistanceAndDuration();
-        print('state.toMap() ${state.toMap()}');
-        //log('AmbulanceListState : ${state.toMap()}');
       }
       /*If ambulance list hasn't been fetched before and internet is connected, and district list has already 
       been fetched then fetch list. We dont want to fetch both lists simultaneously as that could slow us down.*/
       if (!state.hasFetchedList && districtListState.hasFetchedList) {
-        print(
-            ' \n ----------------------Print Calling ambulance fetch list------------------------------');
         await fetchList();
-        print(
-            ' \n ----------------------Done Calling ambulance fetch list------------------------------');
         //If list was fetched successfully, then mark hasFetchedList as true
-        print(
-            'Exception code for ambulance list exception: ${state.exception.errorCode}');
         if (state.exception.errorCode == 0) {
-          print('Has ambulance list been fetched? :${state.hasFetchedList}');
           emit(state.copyWith(hasFetchedList: true));
-          print(
-              ' \n ----------------------Emitting State ------------------------------');
-          print('Has ambulance list been fetched? :${state.hasFetchedList}');
         }
       }
     });
@@ -79,18 +63,17 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
         exception: e,
         dataStatus: DataStatus.error,
       ));
+      //rethrow;
     }
   }
 
   //Fetches Ambulance list from cloud firestore and emits new states as they occur
   Future<void> fetchList() async {
     //Note: ensure that ErrorStatus is reset before loading again. Can reset it here or in a dialog box
-    print('Start of fetch list method::::::::::::::::::::::::');
     emit(state.copyWith(
       dataStatus: DataStatus.loading,
       exception: emptyException,
     ));
-    print('state.hasFetchedList ${state.hasFetchedList}');
     try {
       var ambulanceListMap = await AmbulanceListRepository.fetchDocument();
       ambulanceListMap = ambulanceListMap[ambulanceListKey];
@@ -101,9 +84,6 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
               AmbulanceListState.fromMap(ambulanceListMap).ambulanceList,
         ),
       );
-      print('state.hasFetchedList ${state.hasFetchedList}');
-      print('End of fetch list method::::::::::::::::::::::::');
-      log('AmbulanceListState : ${state.toMap()}');
     } on CustomException catch (e) {
       //If data fails to load, it goes back to initial state. ErrorStatus reflects the error
       emit(
@@ -112,7 +92,7 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
           dataStatus: DataStatus.error,
         ),
       );
-      rethrow;
+      //rethrow;
     }
   }
 
@@ -147,7 +127,6 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
         ambulanceList: newList,
       ));
       filterListForDisplay();
-      log('AmbulanceListState : ${state.toMap()}');
     } on CustomException catch (e) {
       emit(
         state.copyWith(
@@ -155,7 +134,7 @@ class AmbulanceListCubit extends Cubit<AmbulanceListState> {
           dataStatus: DataStatus.error,
         ),
       );
-      rethrow;
+      //rethrow;
     }
   }
 

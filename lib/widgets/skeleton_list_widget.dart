@@ -1,5 +1,5 @@
-import 'package:ambulance/models/ambulance_model.dart';
-import 'package:ambulance/models/travel_distance_model.dart';
+import '../models/ambulance_model.dart';
+import '../models/travel_distance_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

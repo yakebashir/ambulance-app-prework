@@ -1,4 +1,4 @@
-import 'package:ambulance/widgets/user_location_widget.dart';
+import 'user_location_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
