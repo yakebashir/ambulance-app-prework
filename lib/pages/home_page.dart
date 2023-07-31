@@ -5,13 +5,13 @@ import '../cubits/intenet_services/internet_services_cubit.dart';
 import '../cubits/user/user_cubit.dart';
 import '../helpers/auto_adjusting_delay.dart';
 import '../widgets/error_handling_widget.dart';
-import '../widgets/home_page_body_widget.dart';
+import '../widgets/home_page_scaffold_body_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../constants.dart';
-import '../widgets/ambulance_list_widget.dart';
-import '../widgets/skeleton_list_widget.dart';
+import '../widgets/ambulance_list_display_widget.dart';
+import '../widgets/home_page_skeleton_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,21 +27,12 @@ class _HomePageState extends State<HomePage> {
     await context.read<UserCubit>().getLocationPermission();
     //If context is mounted
     if (mounted) {
-      print(
-        '~~~~~~~~~~~~~~~~Checking for internet connectivity inside home page~~~~~~~~~~~~~~~~',
-      );
       //Check for internet connectivity
       await context.read<InternetServicesCubit>().checkInternetStatus();
       //If internet is connected, get current user position
       if (mounted &&
           context.read<InternetServicesCubit>().state.internetStatus ==
               InternetStatus.connected) {
-        // if (mounted &&
-        //         !context.read<DistrictListCubit>().state.hasFetchedList ||
-        //     !context.read<AmbulanceListCubit>().state.hasFetchedList) {
-        //   // Wait 5 seconds
-        //   await Future.delayed(const Duration(seconds: 5));
-        // }
         await autoAdjustingDelay(context: context);
         if (mounted) {
           await context.read<UserCubit>().getCurrentPosition();
@@ -51,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  //didChangeDependencies is called each time dependencies change ie state within it is updated.
   void didChangeDependencies() async {
     await _onAppStart();
     super.didChangeDependencies();
@@ -60,21 +52,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kVeryLightGrey,
+        backgroundColor: kGreyTint,
         body: BlocBuilder<AmbulanceListCubit, AmbulanceListState>(
             builder: (context, state) {
+          //If ambulance list dataStatus shows that data has been loaded, return ambulance list
           if (state.dataStatus != DataStatus.loaded) {
+            //ErrorHandlingWidget handles errors on both pages. Also, this is the only page that can have errors.
             return ErrorHandlingWidget(
               context: context,
-              child: const HomePageBodyWidget(
-                listToDisplay: SkeletonListWidget(),
+              child: const HomePageScaffoldBodyWidget(
+                listToDisplay: HomePageSkeletonList(),
               ),
             );
           }
+          //Otherwise, if dataStatus shows data is loading or initial, return skeleton list
+          //ErrorHandlingWidget handles errors on both pages. Also, this is the only page that can have errors.
           return ErrorHandlingWidget(
             context: context,
-            child: const HomePageBodyWidget(
-              listToDisplay: AmbulanceListWidget(),
+            child: const HomePageScaffoldBodyWidget(
+              listToDisplay: AmbulanceListDisplayWidget(),
             ),
           );
         }),
@@ -82,14 +78,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-//Convenienve function for uploading our databases
-// Future<void> _createDatabases() async {
-//   //This is just a convenience function
-//   //Create district list database
-//   await context.read<DistrictListCubit>().createOrUpdateList();
-//   if (mounted) {
-//     //Create ambulance list database
-//     await context.read<AmbulanceListCubit>().createOrUpdateList();
-//   }
-// }

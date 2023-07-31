@@ -7,10 +7,10 @@ import '../../models/driver_model.dart';
 import '../../models/geocoordinates_model.dart';
 import '../../models/hospital_model.dart';
 import '../../models/travel_duration_model.dart';
-import 'ambulance_card_widget.dart';
+import 'singel_ambulance_display_widget.dart';
 
-class SkeletonListWidget extends StatelessWidget {
-  const SkeletonListWidget({
+class HomePageSkeletonList extends StatelessWidget {
+  const HomePageSkeletonList({
     super.key,
   });
 
@@ -26,7 +26,7 @@ class SkeletonListWidget extends StatelessWidget {
           return Shimmer.fromColors(
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
-            child: const AmbulanceCard(ambulance: ambulance),
+            child: const SingleAmbulanceDisplayWidget(ambulance: ambulance),
           );
         },
       ),

@@ -16,7 +16,16 @@ class CallAmbulanceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: kEngineeringOrange,
+        surfaceTintColor: kWhite,
+        shape: const RoundedRectangleBorder(
+          side: BorderSide(
+            color: kWhite,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(kRoundedBorderRadius),
+          ),
+        ),
+        backgroundColor: kWhite,
       ),
       onPressed: () {
         String availableNumber;
@@ -45,9 +54,9 @@ class CallAmbulanceButton extends StatelessWidget {
         child: Text(
           'Call Ambulance',
           style: TextStyle(
-            color: kWhite,
+            color: Colors.blue,
             fontSize: 18,
-            fontWeight: FontWeight.w200,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

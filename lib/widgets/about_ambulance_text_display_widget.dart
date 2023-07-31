@@ -1,9 +1,10 @@
+import 'package:ambulance/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/ambulance_model.dart';
 
-class DetailsWidget extends StatelessWidget {
-  const DetailsWidget({
+class AboutAmbulanceTextDisplayWidget extends StatelessWidget {
+  const AboutAmbulanceTextDisplayWidget({
     super.key,
     required this.maxLinesNotifier,
     required this.ambulance,
@@ -27,7 +28,10 @@ class DetailsWidget extends StatelessWidget {
             return Text(
               ambulance.details,
               textAlign: TextAlign.justify,
-              style: const TextStyle(fontWeight: FontWeight.w200),
+              style: const TextStyle(
+                fontWeight: FontWeight.w300,
+                color: kBlack,
+              ),
               maxLines: value,
               overflow: TextOverflow.ellipsis,
             );

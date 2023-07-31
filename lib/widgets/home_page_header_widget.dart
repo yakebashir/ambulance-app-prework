@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../config.dart';
 import '../../constants.dart';
 import '../../cubits/user/user_cubit.dart';
-import 'map_autocomplete_field.dart';
+import 'map_autocomplete_text_field.dart';
 
-class UserLocation extends StatelessWidget {
+class HomePageHeaderWidget extends StatelessWidget {
   final BuildContext context;
-  const UserLocation({
+  const HomePageHeaderWidget({
     required this.context,
     super.key,
   });
@@ -20,7 +20,7 @@ class UserLocation extends StatelessWidget {
     return Container(
       height: 350,
       decoration: const BoxDecoration(
-        color: kEngineeringOrange,
+        color: kRedTint,
         borderRadius: BorderRadius.only(
           //bottomLeft: Radius.circular(kRoundedBorderRadius),
           bottomRight: Radius.circular(kRoundedBorderRadius),
@@ -38,12 +38,14 @@ class UserLocation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Hi, Beloved',
-                  style: TextStyle(color: kWhite),
+                  'Hello !',
+                  style: TextStyle(
+                    color: kRedShade,
+                  ),
                 ),
                 IconButton(
-                  color: kWhite,
-                  highlightColor: kDarkEngineeringOrange,
+                  color: kRedShade,
+                  highlightColor: Colors.blue,
                   onPressed: () {},
                   icon: const Icon(
                     Icons.account_circle,
@@ -55,14 +57,14 @@ class UserLocation extends StatelessWidget {
             const Text(
               'Let\'s find your top Ambulance',
               style: TextStyle(
-                color: kWhite,
+                color: Colors.blue,
                 fontSize: 28,
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            MapAutoCompleteField(
+            MapAutoCompleteTextField(
               inputDecoration: InputDecoration(
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.only(
@@ -76,7 +78,7 @@ class UserLocation extends StatelessWidget {
                 prefixIcon: const Icon(
                   Icons.location_on,
                 ),
-                prefixIconColor: kEngineeringOrange,
+                prefixIconColor: kRedShade,
                 suffixIcon: IconButton(
                     onPressed: () {
                       controller.clear();

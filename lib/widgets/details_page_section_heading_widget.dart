@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-
-class SectionHeading extends StatelessWidget {
+class DetailsPageSectionHeadingWidget extends StatelessWidget {
   //variable that holds the heading text
   final String text;
-  const SectionHeading({
+  final Color color;
+  const DetailsPageSectionHeadingWidget({
     required this.text,
+    required this.color,
     super.key,
   });
 
@@ -16,8 +16,8 @@ class SectionHeading extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         text,
-        style: const TextStyle(
-          color: kBlack,
+        style: TextStyle(
+          color: color,
           fontSize: 18,
         ),
       ),

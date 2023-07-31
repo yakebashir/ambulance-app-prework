@@ -99,17 +99,3 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 }
-
-//Method is nolonger used
-// String getDistrictFromResult(
-//   dynamic result,
-// ) {
-//   final addressComponents = result['result']['address_components'];
-//   for (var i = 0; i < addressComponents.length; i++) {
-//     final type0 = addressComponents[i]['types'][0];
-//     if (type0 != [] && type0 == 'administrative_area_level_2') {
-//       return addressComponents[i]['long_name'] ?? 'Unknown';
-//     }
-//   }
-//   return 'Unknown';
-// }

@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
 import 'exceptions/custom_exception.dart';
 
-//Our Colors
-const Color kEngineeringOrange = Color.fromRGBO(200, 0, 0, 1);
-const Color kDarkEngineeringOrange = Color.fromRGBO(208, 23, 13, 1);
-const Color kChilliRed = Color.fromRGBO(226, 25, 14, 1);
+//Colors
+const Color kRed = Color.fromRGBO(200, 0, 0, 1);
+const Color kRedShade = Color.fromRGBO(14, 0, 0, 1);
+const Color kRedTint = Color.fromRGBO(255, 233, 233, 1);
 const Color kGold = Color.fromRGBO(255, 215, 0, 1);
 const Color kWhite = Colors.white;
 const Color kBlack = Colors.black87;
-const Color kLightBlack = Colors.black54;
-final Color kDarkGrey = Colors.grey.shade700;
+//const Color kBlackTint = Colors.black54;
+final Color kGreyShade = Colors.grey.shade600;
 const Color kGrey = Colors.grey;
-final Color kLightGrey = Colors.grey.shade400;
-final Color kVeryLightGrey = Colors.grey.shade100;
+//final Color kLightGrey = Colors.grey.shade400;
+final Color kGreyTint = Colors.grey.shade300;
 
-//TextStyle
-const TextStyle kVioletHeaderStyle = TextStyle(color: kEngineeringOrange);
-
+//TextStyles
+const TextStyle kVioletHeaderStyle = TextStyle(color: kRed);
 const TextStyle kBlackTextStyle = TextStyle(
   color: kBlack,
   fontWeight: FontWeight.normal,
   fontSize: 20,
 );
-
 const TextStyle kGreyHeaderStyle = TextStyle(
   color: kGrey,
   fontWeight: FontWeight.normal,
   fontSize: 22,
 );
-
 const TextStyle kButtonTextStyle = TextStyle(
   color: kWhite,
   fontWeight: FontWeight.w500,
@@ -37,14 +34,11 @@ const TextStyle kButtonTextStyle = TextStyle(
 
 //Elevation
 const double kElevation = 5;
-
 //BorderRadius
 const double kRoundedBorderRadius = 30;
-
 //Symmetric padding
 const double kVerticalPadding = 30;
 const double kHorizontalPadding = 20;
-
 //Google maps locale
 const String locale = 'ug';
 
@@ -72,6 +66,7 @@ const String districtListDocumentID = 'list document ID';
 const String districtListKey = 'districtList';
 
 
+//Error related variables
 //map key stored
 const String title = 'title';
 //Error Codes
@@ -128,3 +123,6 @@ enum ErrorOrigins {
 
 //Max number of ambulances to display
 const int maxAmbulancesToDisplay = 10;
+
+//Max lines on which to display ambulance details before show more is pressed
+const int maxLines = 2;

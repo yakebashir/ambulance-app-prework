@@ -20,8 +20,8 @@ import '../../config.dart';
 /// It also take a [locale] parameter which is used to limit the range of the search region to a particular locale, if no locale is set,
 /// the result span the globe, which no not be desirable behaviour for some use cases.
 
-class MapAutoCompleteField extends StatelessWidget {
-  const MapAutoCompleteField({
+class MapAutoCompleteTextField extends StatelessWidget {
+  const MapAutoCompleteTextField({
     Key? key,
     required this.controller,
     this.suggestionsCallback,
@@ -143,7 +143,7 @@ class MapAutoCompleteField extends StatelessWidget {
                         : '',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      color: kDarkGrey,
+                      color: kGreyShade,
                     ),
                   ),
                 );
@@ -154,12 +154,11 @@ class MapAutoCompleteField extends StatelessWidget {
                   error != null ? 'An error occured' : '',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    color: kDarkGrey,
+                    color: kGreyShade,
                   ),
                 ),
               );
             },
-  
             transitionBuilder: transitionBuilder ??
                 (BuildContext context, Widget suggestionsBox,
                     AnimationController? controller) {

@@ -1,4 +1,5 @@
 import 'package:ambulance/observer/app_bloc_observer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'cubits/error_handling/error_handling_cubit.dart';
 import 'cubits/intenet_services/internet_services_cubit.dart';
@@ -20,7 +21,7 @@ void main() async {
   await Firebase.initializeApp();
   // Set the status bar color
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: kEngineeringOrange,
+    statusBarColor: kRedShade,
   ));
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
@@ -70,12 +71,21 @@ class MyApp extends StatelessWidget {
         },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: kEngineeringOrange),
-        useMaterial3: true,
-        ),
-      initialRoute: HomePage.routeName,
+        theme: _buildTheme(Brightness.dark),
+        initialRoute: SplashScreenPage.routeName,
       ),
     );
   }
+}
+
+ThemeData _buildTheme(brightness) {
+  var baseTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: kRed),
+    //brightness: brightness,
+    useMaterial3: true,
+  );
+
+  return baseTheme.copyWith(
+    textTheme: GoogleFonts.handleeTextTheme(baseTheme.textTheme),
+  );
 }

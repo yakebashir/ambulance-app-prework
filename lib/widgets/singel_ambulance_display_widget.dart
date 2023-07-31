@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../models/ambulance_model.dart';
 
-class AmbulanceCard extends StatelessWidget {
-  const AmbulanceCard({
+class SingleAmbulanceDisplayWidget extends StatelessWidget {
+  const SingleAmbulanceDisplayWidget({
     super.key,
     required this.ambulance,
   });

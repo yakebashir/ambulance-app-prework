@@ -122,7 +122,7 @@ void showDialogBox({
         ),
         content: Text(
           message,
-          style: TextStyle(color: kDarkGrey),
+          style: TextStyle(color: kGreyShade),
         ),
         actions: <Widget>[
           TextButton(

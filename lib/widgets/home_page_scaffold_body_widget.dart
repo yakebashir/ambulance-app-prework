@@ -1,11 +1,11 @@
-import 'user_location_widget.dart';
+import 'home_page_header_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-class HomePageBodyWidget extends StatelessWidget {
+class HomePageScaffoldBodyWidget extends StatelessWidget {
   final Widget listToDisplay;
-  const HomePageBodyWidget({
+  const HomePageScaffoldBodyWidget({
     required this.listToDisplay,
     super.key,
   });
@@ -16,14 +16,14 @@ class HomePageBodyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        UserLocation(
+        HomePageHeaderWidget(
           context: context,
         ),
         const SizedBox(height: 20),
         const Text(
           'Ambulances near you...',
           style: TextStyle(
-            color: kBlack,
+            color: kRedShade,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),

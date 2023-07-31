@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../pages/ambulance_details_page.dart';
-import 'ambulance_card_widget.dart';
+import 'singel_ambulance_display_widget.dart';
 
-class AmbulanceListWidget extends StatelessWidget {
-  const AmbulanceListWidget({
+class AmbulanceListDisplayWidget extends StatelessWidget {
+  const AmbulanceListDisplayWidget({
     super.key,
   });
 
@@ -38,7 +38,7 @@ class AmbulanceListWidget extends StatelessWidget {
                 ),
               );
             },
-            child: AmbulanceCard(ambulance: ambulance),
+            child: SingleAmbulanceDisplayWidget(ambulance: ambulance),
           );
         },
       ),
