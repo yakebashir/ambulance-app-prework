@@ -1,14 +1,14 @@
+import 'package:ambulance/widgets/distance_and_duration_display_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-import '../helpers/widgets/ambulance_card_widget.dart';
-import '../helpers/widgets/ambulance_estimates_widget.dart';
-import '../helpers/widgets/call_ambulance_button.dart';
-import '../helpers/widgets/details_widget.dart';
-import '../helpers/widgets/driver_info_display_widget.dart';
-import '../helpers/widgets/section_heading_widget.dart';
-import '../helpers/widgets/spaced_divider_widget.dart';
 import '../models/ambulance_model.dart';
+import '../widgets/ambulance_details_page_footer_widget.dart';
+import '../widgets/ambulance_details_page_header_widget.dart';
+import '../widgets/call_ambulance_button.dart';
+import '../widgets/about_ambulance_text_display_widget.dart';
+import '../widgets/details_page_section_heading_widget.dart';
+import '../widgets/spaced_divider_widget.dart';
 
 class AmbulanceDetailsPage extends StatelessWidget {
   //ambulance object
@@ -16,22 +16,24 @@ class AmbulanceDetailsPage extends StatelessWidget {
 
   AmbulanceDetailsPage({
     required this.ambulance,
-    super.key,
-  });
+    Key? key, // Added the missing key parameter here
+  }) : super(key: key); // Fixed the constructor definition here
+
   static const String routeName = '/ambulanceDetailsPage';
 
-  final ValueNotifier<int> maxLinesNotifier = ValueNotifier(2);
+  final ValueNotifier<int> maxLinesNotifier = ValueNotifier(maxLines);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kVeryLightGrey,
+        backgroundColor: kMainWhite,
         appBar: AppBar(
-          backgroundColor: kViolet,
+          centerTitle: true,
+          backgroundColor: kMainTintColor,
           leading: IconButton(
-            color: kWhite,
-            highlightColor: kElectricViolet,
+            color: kMainColor,
+            highlightColor: kMainTintColor,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -39,64 +41,61 @@ class AmbulanceDetailsPage extends StatelessWidget {
               Icons.arrow_back_ios_new,
             ),
           ),
-          title: const Center(
-            child: Text(
-              'Ambulance Details',
-              style: TextStyle(
-                color: kWhite,
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-              ),
+          title: const Text(
+            'Ambulance Details',
+            style: TextStyle(
+              color: kMainColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
         body: SingleChildScrollView(
+          primary: true,
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height,
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kHorizontalPadding,
-                vertical: kVerticalPadding,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AmbulanceCard(ambulance: ambulance),
-                  const SpacedDivider(),
-                  const SectionHeading(text: 'About'),
-                  const SizedBox(height: 20),
-                  DetailsWidget(
-                    maxLinesNotifier: maxLinesNotifier,
-                    ambulance: ambulance,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AmbulanceDetailsPageHeaderWidget(ambulance: ambulance),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: kHorizontalPadding,
+                    //vertical: kVerticalPadding,
                   ),
-                  const SizedBox(height: 30),
-                  const EstimatesWidget(
-                    estimate: 'Estimated Distance',
-                    valueWithUnits: '12 km',
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SpacedDivider(),
+                      const DetailsPageSectionHeadingWidget(
+                        text: 'About Us',
+                        color: kMainComplementaryColor,
+                      ),
+                      const SizedBox(height: 20),
+                      AboutAmbulanceTextDisplayWidget(
+                        maxLinesNotifier: maxLinesNotifier,
+                        ambulance: ambulance,
+                      ),
+                      const SizedBox(height: 30),
+                      DistanceAndDurationDisplayWidget(ambulance: ambulance),
+                      const SizedBox(height: 10),
+                      const SpacedDivider(),
+
+                      const SizedBox(height: 20),
+                      AmbulanceDetailsPageFooterWidget(ambulance: ambulance),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CallAmbulanceButton(
+                          ambulance: ambulance,
+                        ),
+                      ),
+                      //const SizedBox(height: 50),
+                    ],
                   ),
-                  const SizedBox(height: 30),
-                  const EstimatesWidget(
-                    estimate: 'Estimated arrival time',
-                    valueWithUnits: '35 minutes',
-                  ),
-                  const SpacedDivider(),
-                  const SectionHeading(text: 'Driver Information'),
-                  const SizedBox(height: 20),
-                  const DriverInfoDisplayWidget(
-                    heading: 'Name',
-                    value: 'Richard Lee',
-                  ),
-                  const SizedBox(height: 30),
-                  const DriverInfoDisplayWidget(
-                    heading: 'Gender',
-                    value: 'Male',
-                  ),
-                  const SizedBox(height: 150),
-                  const CallAmbulanceButton(),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -104,3 +103,4 @@ class AmbulanceDetailsPage extends StatelessWidget {
     );
   }
 }
+
