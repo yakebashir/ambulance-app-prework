@@ -30,7 +30,7 @@ class AboutAmbulanceTextDisplayWidget extends StatelessWidget {
               textAlign: TextAlign.justify,
               style: const TextStyle(
                 fontWeight: FontWeight.w300,
-                color: kBlack,
+                color: kMainColor,
               ),
               maxLines: value,
               overflow: TextOverflow.ellipsis,
@@ -50,8 +50,8 @@ class AboutAmbulanceTextDisplayWidget extends StatelessWidget {
             builder: ((context, value, child) {
               return Text(
                 value <= 2 ? 'Read more...' : 'Show less',
-                style: const TextStyle(
-                  color: Colors.blue,
+                style: TextStyle(
+                  color: kMainGrey,
                 ),
               );
             }),

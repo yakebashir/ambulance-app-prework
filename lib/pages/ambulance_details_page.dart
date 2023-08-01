@@ -27,13 +27,13 @@ class AmbulanceDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kGreyTint,
+        backgroundColor: kMainWhite,
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: kWhite,
+          backgroundColor: kMainTintColor,
           leading: IconButton(
-            color: kRedShade,
-            highlightColor: Colors.blue,
+            color: kMainColor,
+            highlightColor: kMainTintColor,
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -42,11 +42,11 @@ class AmbulanceDetailsPage extends StatelessWidget {
             ),
           ),
           title: const Text(
-            'Ambulance Details Page',
+            'Ambulance Details',
             style: TextStyle(
-              color: kRedShade,
+              color: kMainColor,
               fontSize: 20,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -70,8 +70,8 @@ class AmbulanceDetailsPage extends StatelessWidget {
                     children: [
                       const SpacedDivider(),
                       const DetailsPageSectionHeadingWidget(
-                        text: 'About',
-                        color: kRedShade,
+                        text: 'About Us',
+                        color: kMainComplementaryColor,
                       ),
                       const SizedBox(height: 20),
                       AboutAmbulanceTextDisplayWidget(

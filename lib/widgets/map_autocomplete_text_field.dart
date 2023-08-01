@@ -143,7 +143,7 @@ class MapAutoCompleteTextField extends StatelessWidget {
                         : '',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      color: kGreyShade,
+                      color: kMainGrey,
                     ),
                   ),
                 );
@@ -154,7 +154,7 @@ class MapAutoCompleteTextField extends StatelessWidget {
                   error != null ? 'An error occured' : '',
                   textAlign: TextAlign.justify,
                   style: TextStyle(
-                    color: kGreyShade,
+                    color: kMainGrey,
                   ),
                 ),
               );

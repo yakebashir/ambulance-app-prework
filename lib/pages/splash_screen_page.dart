@@ -36,13 +36,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   //Splash screen lacking an image
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: kMainColor,
       body: Center(
         child: Text('Ambulance',
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: kWhite,
+              color: kMainWhite,
             )),
       ),
     );

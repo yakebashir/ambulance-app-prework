@@ -23,7 +23,7 @@ class HomePageScaffoldBodyWidget extends StatelessWidget {
         const Text(
           'Ambulances near you...',
           style: TextStyle(
-            color: kRedShade,
+            color: kMainBlack,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),

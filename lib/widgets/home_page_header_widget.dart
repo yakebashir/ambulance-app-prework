@@ -20,7 +20,7 @@ class HomePageHeaderWidget extends StatelessWidget {
     return Container(
       height: 350,
       decoration: const BoxDecoration(
-        color: kRedTint,
+        color: kMainColor,
         borderRadius: BorderRadius.only(
           //bottomLeft: Radius.circular(kRoundedBorderRadius),
           bottomRight: Radius.circular(kRoundedBorderRadius),
@@ -40,11 +40,11 @@ class HomePageHeaderWidget extends StatelessWidget {
                 const Text(
                   'Hello !',
                   style: TextStyle(
-                    color: kRedShade,
+                    color: kMainWhite,
                   ),
                 ),
                 IconButton(
-                  color: kRedShade,
+                  color: kMainTintColor,
                   highlightColor: Colors.blue,
                   onPressed: () {},
                   icon: const Icon(
@@ -57,7 +57,7 @@ class HomePageHeaderWidget extends StatelessWidget {
             const Text(
               'Let\'s find your top Ambulance',
               style: TextStyle(
-                color: Colors.blue,
+                color: kMainWhite,
                 fontSize: 28,
               ),
             ),
@@ -67,6 +67,9 @@ class HomePageHeaderWidget extends StatelessWidget {
             MapAutoCompleteTextField(
               inputDecoration: InputDecoration(
                 border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kMainTransparent,
+                  ),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(kRoundedBorderRadius),
                     bottomRight: Radius.circular(kRoundedBorderRadius),
@@ -78,18 +81,18 @@ class HomePageHeaderWidget extends StatelessWidget {
                 prefixIcon: const Icon(
                   Icons.location_on,
                 ),
-                prefixIconColor: kRedShade,
+                prefixIconColor: kMainDarkColor,
                 suffixIcon: IconButton(
                     onPressed: () {
                       controller.clear();
                     },
                     icon: const Icon(
                       Icons.close_rounded,
-                      color: kBlack,
+                      color: kMainComplementaryColor,
                       size: 15,
                     )),
                 filled: true,
-                fillColor: kWhite,
+                fillColor: kMainWhite,
               ),
               locale: locale,
               googleMapApiKey: gMapsAPIKey,

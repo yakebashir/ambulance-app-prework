@@ -22,9 +22,10 @@ class DistanceAndDurationValueWidget extends StatelessWidget {
       child: SizedBox(
         height: 200,
         child: Card(
-          elevation: 10,
-          color: kWhite,
-          surfaceTintColor: kWhite,
+          elevation: 5,
+          color: kMainColor,
+          surfaceTintColor: kMainTintColor,
+          shadowColor: kMainTintColor,
           child: Column(
             children: [
               Expanded(
@@ -35,7 +36,7 @@ class DistanceAndDurationValueWidget extends StatelessWidget {
                         : ambulance.duration.text,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: kRedShade,
+                      color: kMainWhite,
                       fontSize: 24,
                     ),
                   ),

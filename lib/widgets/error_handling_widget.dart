@@ -118,11 +118,11 @@ void showDialogBox({
       return AlertDialog(
         title: Text(
           title,
-          style: const TextStyle(color: kBlack),
+          style: const TextStyle(color: kMainBlack),
         ),
         content: Text(
           message,
-          style: TextStyle(color: kGreyShade),
+          style: TextStyle(color: kMainGrey),
         ),
         actions: <Widget>[
           TextButton(

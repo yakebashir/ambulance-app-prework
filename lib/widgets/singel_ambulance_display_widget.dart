@@ -20,10 +20,10 @@ class SingleAmbulanceDisplayWidget extends StatelessWidget {
           bottomRight: Radius.circular(kRoundedBorderRadius),
         ),
       ),
-      //elevation: 5,
-      color: kWhite,
-      surfaceTintColor: kWhite,
-      //shadowColor: kElectricViolet,
+      elevation: 5,
+      color: kMainWhite,
+      surfaceTintColor: kMainWhite,
+      shadowColor: kMainTintColor,
       child: ListTile(
         leading: const Image(
           image: AssetImage('images/medical.png'),
@@ -40,14 +40,14 @@ class SingleAmbulanceDisplayWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 ambulance.hospital.district,
-                style: const TextStyle(color: kGrey),
+                style: TextStyle(color: kMainGrey),
               ),
             ),
             Row(
               children: [
                 const Icon(
                   Icons.moving_rounded,
-                  color: kGold,
+                  color: kMainColor,
                 ),
                 Text(
                   ambulance.distance.text,

@@ -9,11 +9,13 @@ class DriverDetailsDisplayWidget extends StatelessWidget {
   final String valueWithUnits;
   //variable that holds text color
   final Color textColor;
+  final ShapeBorder? shape;
 
   const DriverDetailsDisplayWidget({
     required this.estimate,
     required this.valueWithUnits,
     required this.textColor,
+    this.shape,
     super.key,
   });
 
@@ -22,9 +24,10 @@ class DriverDetailsDisplayWidget extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: Card(
+        shape: shape,
         elevation: 10,
-        color: kWhite,
-        surfaceTintColor: Colors.transparent,
+        color: kMainWhite,
+        surfaceTintColor: kMainTintColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,26 +40,29 @@ class DriverDetailsDisplayWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     color: textColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
             ),
-            Text(
+            const Text(
               ':',
               style: TextStyle(
                 fontSize: 16,
-                color: textColor,
+                color: kMainColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
             Expanded(
               //flex: 2,
-              child: Text(
-                '$valueWithUnits.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: textColor,
-                  fontWeight: FontWeight.w400,
+              child: Center(
+                child: Text(
+                  '$valueWithUnits.',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: kMainColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

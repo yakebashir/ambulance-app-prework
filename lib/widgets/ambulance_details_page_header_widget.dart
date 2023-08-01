@@ -13,55 +13,53 @@ class AmbulanceDetailsPageHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 5,
-      ),
-      child: Container(
-        height: 220,
-        decoration: const BoxDecoration(
-          color: kRedTint,
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              kRoundedBorderRadius,
-            ),
+    return Container(
+      height: 220,
+      decoration: const BoxDecoration(
+        color: kMainColor,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(
+            kRoundedBorderRadius,
+          ),
+          bottomRight: Radius.circular(
+            kRoundedBorderRadius,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: kVerticalPadding,
-            horizontal: kHorizontalPadding,
-          ),
-          child: ListTile(
-            contentPadding: EdgeInsets
-                .zero, // To remove the default padding around ListTile
-            subtitle: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  ambulance.hospital.name,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: kVerticalPadding,
+          horizontal: kHorizontalPadding,
+        ),
+        child: ListTile(
+          contentPadding:
+              EdgeInsets.zero, // To remove the default padding around ListTile
+          subtitle: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                ambulance.hospital.name,
+                style: const TextStyle(
+                  fontSize: 28,
+                  color: kMainWhite,
+                ),
+              ),
+              Align(
+                child: Text(
+                  ambulance.hospital.district,
                   style: const TextStyle(
-                    fontSize: 28,
-                    color: kRedShade,
+                    color: kMainTintColor,
                   ),
                 ),
-                Align(
-                  child: Text(
-                    ambulance.hospital.district,
-                    style: TextStyle(
-                      color: kGreyShade,
-                    ),
-                  ),
-                ),
-                const Image(
-                  image: AssetImage('images/medical.png'),
-                  height: 50,
-                  width: 50,
-                ),
-              ],
-            ),
+              ),
+              const Image(
+                image: AssetImage('images/medical.png'),
+                height: 50,
+                width: 50,
+              ),
+            ],
           ),
         ),
       ),

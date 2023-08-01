@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
 import 'exceptions/custom_exception.dart';
 
-//Colors
-const Color kRed = Color.fromRGBO(200, 0, 0, 1);
-const Color kRedShade = Color.fromRGBO(14, 0, 0, 1);
-const Color kRedTint = Color.fromRGBO(255, 233, 233, 1);
-const Color kGold = Color.fromRGBO(255, 215, 0, 1);
-const Color kWhite = Colors.white;
-const Color kBlack = Colors.black87;
-//const Color kBlackTint = Colors.black54;
-final Color kGreyShade = Colors.grey.shade600;
-const Color kGrey = Colors.grey;
-//final Color kLightGrey = Colors.grey.shade400;
-final Color kGreyTint = Colors.grey.shade300;
+//Azure is the theme color
+const Color kMainColor = Color.fromRGBO(0, 127, 255, 1);
+const Color kMainDarkColor = Color.fromRGBO(0, 100, 200, 1);
+const Color kMainTintColor = Color.fromRGBO(200, 228, 255, 1);
+const Color kMainComplementaryColor = Color.fromRGBO(255, 128, 0, 1);
+const Color kMainAnalogousColor = Color.fromRGBO(0, 255, 213, 1);
+const Color kMainWhite = Colors.white;
+const Color kMainBlack = Colors.black87;
+final Color kMainGrey = Colors.grey.shade400;
+const Color kMainTransparent = Colors.transparent;
+
+//EngeneeringOrange is the theme color
+// const Color kMainColor = Color.fromRGBO(200, 0, 0, 1);
+// //4th shade out of 15
+// const Color kMainDarkColor = Color.fromRGBO(156, 0, 0, 1);
+// //12th tint out of 15
+// const Color kMainTintColor = Color.fromRGBO(255, 188, 188, 1);
+// const Color kMainComplementaryColor = Color.fromRGBO(0, 199, 199, 1);
+// const Color kMainAnalogousColor = Color.fromRGBO(199, 0, 133, 1);
+// const Color kMainWhite = Colors.white;
+// const Color kMainBlack = Colors.black87;
+// final Color kMainGrey = Colors.grey.shade400;
+// const Color kMainTransparent = Colors.transparent;
 
 //TextStyles
-const TextStyle kVioletHeaderStyle = TextStyle(color: kRed);
+const TextStyle kVioletHeaderStyle = TextStyle(color: kMainColor);
 const TextStyle kBlackTextStyle = TextStyle(
-  color: kBlack,
+  color: kMainBlack,
   fontWeight: FontWeight.normal,
   fontSize: 20,
 );
-const TextStyle kGreyHeaderStyle = TextStyle(
-  color: kGrey,
+final TextStyle kGreyHeaderStyle = TextStyle(
+  color: kMainGrey,
   fontWeight: FontWeight.normal,
   fontSize: 22,
 );
 const TextStyle kButtonTextStyle = TextStyle(
-  color: kWhite,
+  color: kMainWhite,
   fontWeight: FontWeight.w500,
   fontSize: 20,
 );

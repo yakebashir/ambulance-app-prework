@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kGreyTint,
+        backgroundColor: kMainWhite,
         body: BlocBuilder<AmbulanceListCubit, AmbulanceListState>(
             builder: (context, state) {
           //If ambulance list dataStatus shows that data has been loaded, return ambulance list

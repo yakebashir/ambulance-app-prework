@@ -21,7 +21,7 @@ void main() async {
   await Firebase.initializeApp();
   // Set the status bar color
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: kRedShade,
+    statusBarColor: kMainDarkColor,
   ));
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
 
 ThemeData _buildTheme(brightness) {
   var baseTheme = ThemeData(
-    colorScheme: ColorScheme.fromSeed(seedColor: kRed),
+    colorScheme: ColorScheme.fromSeed(seedColor: kMainColor),
     //brightness: brightness,
     useMaterial3: true,
   );

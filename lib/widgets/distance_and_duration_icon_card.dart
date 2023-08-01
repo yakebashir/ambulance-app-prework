@@ -17,21 +17,21 @@ class DistanceAndDurationIconCard extends StatelessWidget {
       width: double.maxFinite,
       height: 90,
       child: Card(
-        color: kRedTint,
-        surfaceTintColor: kWhite,
+        color: kMainWhite,
+        surfaceTintColor: kMainWhite,
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               Icon(
                 iconData,
-                color: kRedShade,
+                color: kMainColor,
                 size: 36,
               ),
               Text(
                 text,
                 style: const TextStyle(
-                  color: kRedShade,
+                  color: kMainColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
