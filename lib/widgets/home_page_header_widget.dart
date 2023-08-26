@@ -18,7 +18,7 @@ class HomePageHeaderWidget extends StatelessWidget {
     final TextEditingController controller = TextEditingController(
         text: context.watch<UserCubit>().state.user.pickUpLocation);
     return Container(
-      height: 350,
+      height: MediaQuery.of(context).size.height * 0.46,
       decoration: const BoxDecoration(
         color: kMainColor,
         borderRadius: BorderRadius.only(
@@ -61,9 +61,9 @@ class HomePageHeaderWidget extends StatelessWidget {
                 fontSize: 28,
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             MapAutoCompleteTextField(
               inputDecoration: InputDecoration(
                 border: const OutlineInputBorder(

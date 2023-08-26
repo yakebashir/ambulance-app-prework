@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ambulance/constants.dart';
 
 import '../cubits/error_handling/error_handling_cubit.dart';
@@ -209,4 +211,6 @@ Future<void> fixError98(BuildContext context) async {
 
 Future<void> fixError202(BuildContext context) async {
   await context.read<UserCubit>().openLocationSettings();
+  exit(0);
+  
 }

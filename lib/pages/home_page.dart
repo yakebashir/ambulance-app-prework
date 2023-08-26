@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../cubits/ambulance_list/ambulance_list_cubit.dart';
+import 'package:flutter/services.dart';
 import '../cubits/intenet_services/internet_services_cubit.dart';
 import '../cubits/user/user_cubit.dart';
 import '../helpers/auto_adjusting_delay.dart';
@@ -8,6 +9,7 @@ import '../widgets/error_handling_widget.dart';
 import '../widgets/home_page_scaffold_body_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 import '../constants.dart';
 import '../widgets/ambulance_list_display_widget.dart';
@@ -22,6 +24,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  
 
   Future<void> _onAppStart() async {
     await context.read<UserCubit>().getLocationPermission();
@@ -45,11 +49,13 @@ class _HomePageState extends State<HomePage> {
   //didChangeDependencies is called each time dependencies change ie state within it is updated.
   void didChangeDependencies() async {
     await _onAppStart();
-    super.didChangeDependencies();
+    super.didChangeDependencies(); 
   }
+
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
         backgroundColor: kMainWhite,

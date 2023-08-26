@@ -60,7 +60,7 @@ class DriverDetailsDisplayWidget extends StatelessWidget {
                   '$valueWithUnits.',
                   style: const TextStyle(
                     fontSize: 16,
-                    color: kMainColor,
+                    color: kMainBlack,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

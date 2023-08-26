@@ -30,7 +30,7 @@ class AboutAmbulanceTextDisplayWidget extends StatelessWidget {
               textAlign: TextAlign.justify,
               style: const TextStyle(
                 fontWeight: FontWeight.w300,
-                color: kMainColor,
+                color: kMainBlack,
               ),
               maxLines: value,
               overflow: TextOverflow.ellipsis,

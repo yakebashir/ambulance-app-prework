@@ -10,7 +10,7 @@ class AmbulanceListState extends Equatable {
 
   factory AmbulanceListState.initial() {
     return AmbulanceListState(
-      ambulanceList: const [],
+      ambulanceList: const [] ,
       dataStatus: DataStatus.initial,
       exception: emptyException,
     );

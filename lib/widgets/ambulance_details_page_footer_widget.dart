@@ -26,7 +26,7 @@ class AmbulanceDetailsPageFooterWidget extends StatelessWidget {
           children: [
             const DetailsPageSectionHeadingWidget(
               text: 'Driver Information',
-              color: kMainComplementaryColor,
+              color: kMainColor,
             ),
             const SizedBox(height: 15),
             Expanded(
@@ -34,7 +34,7 @@ class AmbulanceDetailsPageFooterWidget extends StatelessWidget {
               children: [
                 DriverDetailsDisplayWidget(
                   estimate: 'Name',
-                  valueWithUnits: ambulance.driver.gender,
+                  valueWithUnits: ambulance.driver.name,
                   textColor: kMainDarkColor,
                   shape: nameCardShape,
                 ),

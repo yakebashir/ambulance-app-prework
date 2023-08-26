@@ -25,6 +25,7 @@ class AmbulanceDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
         backgroundColor: kMainWhite,
@@ -71,7 +72,7 @@ class AmbulanceDetailsPage extends StatelessWidget {
                       const SpacedDivider(),
                       const DetailsPageSectionHeadingWidget(
                         text: 'About Us',
-                        color: kMainComplementaryColor,
+                        color: kMainColor,
                       ),
                       const SizedBox(height: 20),
                       AboutAmbulanceTextDisplayWidget(

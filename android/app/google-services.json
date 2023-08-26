@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "410757189371",
-    "project_id": "ambulance-ddc5d",
-    "storage_bucket": "ambulance-ddc5d.appspot.com"
+    "project_number": "812505053040",
+    "project_id": "ambuyake-5c307",
+    "storage_bucket": "ambuyake-5c307.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:410757189371:android:29cc319a956afd7e586a5e",
+        "mobilesdk_app_id": "1:812505053040:android:1496348520b14f291441b5",
         "android_client_info": {
           "package_name": "com.example.ambulance"
         }
       },
       "oauth_client": [
         {
-          "client_id": "410757189371-1n4dd42a9h3fohp1u7kivqtj1s1k76eo.apps.googleusercontent.com",
+          "client_id": "812505053040-vrp4kos2044370dgq35asjtmv04jdk44.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDM7a_EiLTYeKwH7ok5T_J-GgxXtL95zVI"
+          "current_key": "AIzaSyBIUXQ5MgPSbsrinT1tRGgqVhsrv0wcruM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "410757189371-1n4dd42a9h3fohp1u7kivqtj1s1k76eo.apps.googleusercontent.com",
+              "client_id": "812505053040-vrp4kos2044370dgq35asjtmv04jdk44.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
